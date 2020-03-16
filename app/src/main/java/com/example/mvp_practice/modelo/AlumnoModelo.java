@@ -1,13 +1,11 @@
 package com.example.mvp_practice.modelo;
+
 import com.example.mvp_practice.Apis.Api;
 import com.example.mvp_practice.Direcciones.Urls;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
-
 import cz.msebera.android.httpclient.Header;
 
 public class AlumnoModelo {
@@ -17,12 +15,12 @@ public class AlumnoModelo {
 
     ArrayList<Integer> ids = new ArrayList<>();
     ArrayList<String> names = new ArrayList<>();
-    ArrayList<String> precios = new ArrayList<>();
-    ArrayList<String> descripciones = new ArrayList<>();
-    ArrayList<String> tipoProductos = new ArrayList<>();
-    ArrayList<String> proveedores = new ArrayList<>();
-    ArrayList<Integer> statuses = new ArrayList<>();
-    ArrayList<String> folios = new ArrayList<>();
+    ArrayList<String> edades = new ArrayList<>();
+    ArrayList<String> direcciones = new ArrayList<>();
+    ArrayList<String> sexos = new ArrayList<>();
+    ArrayList<String> apellidosP = new ArrayList<>();
+    ArrayList<String> apellidosM = new ArrayList<>();
+    ArrayList<String> carreras = new ArrayList<>();
 
     public void setToken(String token) {
         this.token = token;
@@ -36,28 +34,28 @@ public class AlumnoModelo {
         return names;
     }
 
-    public ArrayList<String> getPrecios() {
-        return precios;
+    public ArrayList<String> getEdades() {
+        return edades;
     }
 
-    public ArrayList<String> getDescripciones() {
-        return descripciones;
+    public ArrayList<String> getDirecciones() {
+        return direcciones;
     }
 
-    public ArrayList<String> getTipoProductos() {
-        return tipoProductos;
+    public ArrayList<String> getSexos() {
+        return sexos;
     }
 
-    public ArrayList<String> getProveedores() {
-        return proveedores;
+    public ArrayList<String> getApellidosP() {
+        return apellidosP;
     }
 
-    public ArrayList<Integer> getStatuses() {
-        return statuses;
+    public ArrayList<String> getApellidosM() {
+        return apellidosM;
     }
 
-    public ArrayList<String> getFolios() {
-        return folios;
+    public ArrayList<String> getCarreras() {
+        return carreras;
     }
 
     public void getData() {
@@ -76,13 +74,13 @@ public class AlumnoModelo {
 
                         ids.add(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
                         names.add(jsonArray.getJSONObject(i).getString("nombre"));
-                        precios.add(jsonArray.getJSONObject(i).getString("precio"));
+                        edades.add(jsonArray.getJSONObject(i).getString("edad"));
 
-                        descripciones.add(jsonArray.getJSONObject(i).getString("descripcion"));
-                        tipoProductos.add(jsonArray.getJSONObject(i).getString("tipoProducto"));
-                        proveedores.add(jsonArray.getJSONObject(i).getString("proveedor"));
-                        statuses.add(Integer.parseInt(jsonArray.getJSONObject(i).getString("status")));
-                        folios.add(jsonArray.getJSONObject(i).getString("folio"));
+                        direcciones.add(jsonArray.getJSONObject(i).getString("direccion"));
+                        sexos.add(jsonArray.getJSONObject(i).getString("sexo"));
+                        apellidosP.add(jsonArray.getJSONObject(i).getString("apellidoPaterno"));
+                        apellidosM.add((jsonArray.getJSONObject(i).getString("apellidoMaterno")));
+                        carreras.add(jsonArray.getJSONObject(i).getString("carrera"));
                     }
 
                 } catch (Exception e) {

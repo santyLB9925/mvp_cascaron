@@ -1,9 +1,8 @@
 package com.example.mvp_practice.modelo;
-
 import android.content.Intent;
-//import com.example.mvp.Dashboard;
-import com.example.mvp_practice.Apis.Api;
+import com.example.mvp_practice.TablaFragment;
 import com.example.mvp_practice.Direcciones.Urls;
+import com.example.mvp_practice.Apis.Api;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -16,6 +15,7 @@ public class LoginModelo {
 
     AsyncHttpClient client = new AsyncHttpClient();
     RequestParams params =  new  RequestParams ();
+
     String password;
     String name;
     String token;
