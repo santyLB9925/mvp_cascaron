@@ -1,17 +1,32 @@
 package com.example.mvp_practice.modelo;
 
+import android.widget.Toast;
+
 import com.example.mvp_practice.Apis.Api;
 import com.example.mvp_practice.Direcciones.Urls;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 public class AlumnoModelo {
 
     AsyncHttpClient client = new AsyncHttpClient();
+
+
     String token;
+
+    String nombre;
+    String apellidoP;
+    String apellidoM;
+    String carrera;
+    String edad;
+    String sexo;
+    String direccion;
 
     ArrayList<Integer> ids = new ArrayList<>();
     ArrayList<String> names = new ArrayList<>();
@@ -25,6 +40,13 @@ public class AlumnoModelo {
     public void setToken(String token) {
         this.token = token;
     }
+    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setApellidoPaterno(String apellidoP) {this.apellidoP = apellidoP; }
+    public void setApellidoMaterno(String apellidoM) {this.apellidoM = apellidoM;}
+    public void setCarrera(String carrera) {this.carrera = carrera;}
+    public void setEdad(String edad) {this.edad = edad;}
+    public void setSexo(String sexo) { this.sexo = sexo; }
+    public void setDireccion(String direccion) {this.direccion = direccion;}
 
     public ArrayList<Integer> getIds() {
         return ids;
@@ -90,6 +112,72 @@ public class AlumnoModelo {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            }
+        });
+    }
+    public void Delete(int idSelected){
+        String head = "Token " + token;
+        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        client.addHeader("Authorization", head);
+
+        client.delete(Urls.URL + Api.DeleteStudent + idSelected + "/", new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+            }
+        });
+    }
+    public void Post(){
+        String head = "Token " + token;
+        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        client.addHeader("Authorization", head);
+        RequestParams params =  new  RequestParams ();
+        params.put("nombre", nombre);
+        params.put("edad", edad);
+        params.put("direccion", direccion);
+        params.put("sexo", sexo);
+        params.put("apellidoPaterno", apellidosP);
+        params.put("apellidoMaterno", apellidosM);
+        params.put("carrera", carrera);
+
+
+        client.post(Urls.URL + Api.PostStudent, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                getData();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+            }
+        });
+    }
+    public void Update(int idSelected){
+        String head = "Token " + token;
+        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        client.addHeader("Authorization", head);
+        RequestParams params =  new  RequestParams ();
+        params.put("nombre", nombre);
+        params.put("edad", edad);
+        params.put("direccion", direccion);
+        params.put("sexo", sexo);
+        params.put("apellidoPaterno", apellidosP);
+        params.put("apellidoMaterno", apellidosM);
+        params.put("carrera", carrera);
+
+        client.put(Urls.URL + Api.UpdateStudent + idSelected + "/", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                getData();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
             }
         });
     }
